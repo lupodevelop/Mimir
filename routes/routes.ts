@@ -8,6 +8,10 @@ router.get("/user", (ctx:any) => {
     ctx.response.body = user;
 });
 
+router.get("/user/:id", (ctx) => {
+    ctx.response.body = ctx.params.id;
+});
+
 router.post("/user", async (ctx:any) => {
 
     const { value } = await ctx.request.body();
