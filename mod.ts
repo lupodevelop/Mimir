@@ -1,7 +1,11 @@
-import { log, Application } from "./deps.ts";
+import { 
+  log, 
+  Application, 
+  config,
+ } from "./deps.ts";
+ 
 import router from "./routes/routes.ts";
 import notFound from "./404.ts";
-import { config } from "./deps.ts";
 
 
 // INIT APP
