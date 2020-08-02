@@ -1,23 +1,13 @@
 import { Router } from "../deps.ts";
-
+import UserController from "../controllers/UserController.ts";
 
 const router = new Router();
 
-router.get("/user", (ctx:any) => {
-    const user = {name: "admin", email: "isvalid@email.com" };
-    ctx.response.body = user;
-});
 
-router.get("/user/:id", (ctx) => {
-    ctx.response.body = ctx.params.id;
-});
+router.get("/user", UserController.index)
+    
+.get("/user/:id", UserController.show)
 
-router.post("/user", async (ctx:any) => {
-
-    const { value } = await ctx.request.body();
-
-    ctx.response.status = 201;
-    ctx.response.body = value;
-});
+.post("/user", UserController.store);
 
 export default router;
