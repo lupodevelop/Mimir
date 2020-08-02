@@ -1,5 +1,6 @@
 import { log, Application } from "./deps.ts";
 import router from "./routes/routes.ts";
+import notFound from "./404.ts";
 
 // INIT APP
 const app = new Application();
@@ -21,9 +22,7 @@ await log.setup({
 });
 
 app.use(router.routes());
-app.use(async (ctx) => {
-  ctx.response.body = "The server is online";
-});
+app.use(notFound);
 
 log.info(`>>>   Mimir is alive @ ${HOST} : ${PORT}`);
 await app.listen(`${HOST}:${PORT}`);
