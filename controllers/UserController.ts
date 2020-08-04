@@ -8,6 +8,7 @@ export default {
         const data = await user.find();
         ctx.response.body = data;
     },
+    // TODO: the server crashes when looking for an id that doesn't exist 
     async show ( ctx : any ) {
         try{
         const data = await user.findOne(
