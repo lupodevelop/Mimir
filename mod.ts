@@ -14,7 +14,6 @@ import notFound from "./404.ts";
 const app = new Application();
 
 //INIT DB
-await init();
 const client  = new MongoClient();
 client.connectWithUri("mongodb://localhost:27017");
 
