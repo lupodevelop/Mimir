@@ -2,7 +2,6 @@ import {
   log, 
   Application, 
   config,
-  MongoClient,
  } from "./deps.ts";
  
 import router from "./routes/routes.ts";
@@ -11,15 +10,6 @@ import notFound from "./404.ts";
 
 // INIT APP
 const app = new Application();
-
-//INIT DB
-const client  = new MongoClient();
-client.connectWithUri("mongodb://localhost:27017");
-
-const db = client.database("deno");
-const users = db.collection("users");
-
-users.insertOne({ name: "TEST USER"});
 
 // SERVER SETTINGS
 const env = config();
