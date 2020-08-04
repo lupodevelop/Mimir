@@ -1,6 +1,6 @@
 # Folder
 test/
-
+.deno_plugins/
 
 # MacOS X 
 .DS_Store
