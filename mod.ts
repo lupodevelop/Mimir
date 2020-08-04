@@ -19,6 +19,8 @@ client.connectWithUri("mongodb://localhost:27017");
 const db = client.database("deno");
 const users = db.collection("users");
 
+users.insertOne({ name: "TEST USER"});
+
 // SERVER SETTINGS
 const env = config();
 const HOST =  env.APP_HOST || "localhost";
