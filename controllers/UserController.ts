@@ -8,8 +8,17 @@ export default {
         const data = await user.find();
         ctx.response.body = data;
     },
-    show ( ctx : any ) {
-        ctx.response.body = ctx.params.id;
+    async show ( ctx : any ) {
+        try{
+        const data = await user.findOne(
+            {_id: {$oid: ctx.params.id}},
+            );
+             ctx.response.body = data;
+        } catch (e) {
+            ctx.response.status = 404;
+            ctx.response.body = {error: "This isn't the user you're looking for"};
+
+        }
     },
     async store ( ctx  : any) {
 
