@@ -15,6 +15,5 @@ export { config } from "https://deno.land/x/dotenv@v0.5.0/mod.ts";
 
 //MongoDB Driver
 export { 
-  init,
-  MongoClient,
+    MongoClient,
 } from "https://deno.land/x/mongo@v0.9.2/mod.ts";

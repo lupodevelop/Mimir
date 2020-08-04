@@ -2,7 +2,6 @@ import {
   log, 
   Application, 
   config,
-  init,
   MongoClient,
  } from "./deps.ts";
  
