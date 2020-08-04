@@ -1,7 +1,12 @@
+import db from "../config/databases.ts";
+
+const user = db.collection("users");
+
+
 export default {
-    index ( ctx : any ) {
-        const user = {name: "admin", email: "isvalid@email.com" };
-        ctx.response.body = user;
+    async index ( ctx : any ) {
+        const data = await user.find();
+        ctx.response.body = data;
     },
     show ( ctx : any ) {
         ctx.response.body = ctx.params.id;
