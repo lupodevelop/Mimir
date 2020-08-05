@@ -1,4 +1,5 @@
 import db from "../config/databases.ts";
+import { ObjectId } from "../deps.ts"
 
 const user = db.collection("users");
 
@@ -8,10 +9,20 @@ export default {
         const data = await user.find();
         ctx.response.body = data;
     },
-    // TODO: the server crashes when looking for an id that doesn't exist 
     async show ( ctx : any ) {
         try{
-        const data = await user.findOne(
+            /*
+            NOTE: Why to use ObjectId
+            It's necessary to cast with ObjectId to verify that the ID 
+            is in the correct format, otherwise it will throw an error.
+            
+            REFERENCE:
+            @Ikkino
+            https://github.com/manyuanrong/deno_mongo/issues/89
+            */
+            const id = ObjectId(ctx.params.id);
+
+            const data = await user.findOne(
             {_id: {$oid: ctx.params.id}},
             );
              ctx.response.body = data;
