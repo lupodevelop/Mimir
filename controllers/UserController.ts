@@ -36,6 +36,8 @@ export default {
 
         const { value } = await ctx.request.body();
 
+        const insertID = await user.insertOne( value );
+
         ctx.response.status = 201;
         ctx.response.body = value;
     },
