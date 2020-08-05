@@ -1,5 +1,5 @@
 import db from "../config/databases.ts";
-import { ObjectId } from "../deps.ts"
+import { ObjectId } from "../deps.ts";
 
 const user = db.collection("users");
 
