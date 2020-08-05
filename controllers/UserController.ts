@@ -38,7 +38,14 @@ export default {
         const { value } = await ctx.request.body();
 
         const insertID = await user.insertOne( value );
-
+        
+        /* HTTP 201 Created
+        success status response code indicates that the 
+        request has succeeded and has led to the creation 
+        of a resource.
+        The common use case of this status code is as the 
+        result of a POST request.
+        */
         ctx.response.status = 201;
         ctx.response.body = value;
         } else {
