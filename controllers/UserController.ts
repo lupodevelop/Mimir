@@ -12,10 +12,10 @@ export default {
     async show ( ctx : any ) {
         try{
             /*
-            NOTE: Why to use ObjectId
+            NOTE: Why to use ObjectId 
             It's necessary to cast with ObjectId to verify that the ID 
             is in the correct format, otherwise it will throw an error.
-            
+
             REFERENCE:
             @Ikkino
             https://github.com/manyuanrong/deno_mongo/issues/89
