@@ -34,11 +34,20 @@ export default {
     },
     async store ( ctx  : any) {
         //TODO: Better control over the data entered may be needed
-        if ( ctx.request.hasBody ) {
-        const { value } = await ctx.request.body();
 
+        if ( !ctx.request.hasBody ) {
+            /* HTTP 400 Bad Request
+            response status code indicates that the server 
+            cannot or will not process the request due to 
+            something that is perceived to be a client error
+            */
+           ctx.response.status = 400;  
+           ctx.response.body = { error: "Please insert some data" };
+           return;
+
+        }
+        const { value } = await ctx.request.body();
         const insertID = await user.insertOne( value );
-        
         /* HTTP 201 Created
         success status response code indicates that the 
         request has succeeded and has led to the creation 
@@ -47,16 +56,7 @@ export default {
         result of a POST request.
         */
         ctx.response.status = 201;
-        ctx.response.body = value;
-        } else {
-            /* HTTP 400 Bad Request
-            response status code indicates that the server 
-            cannot or will not process the request due to 
-            something that is perceived to be a client error
-            */
-            ctx.response.status = 400;  
-            ctx.response.body = { error: "Please insert some data" };
-        }
+        ctx.response.body = insertID;
     },
     update ( ctx : any ){
         
