@@ -76,7 +76,16 @@ export default {
     update ( ctx : any ){
         
     },
-    destroy ( ctx : any ){
-
+    async destroy ( ctx : any ){
+        try {
+            // I use the solution I used before to check the id
+            const id = ObjectId(ctx.params.id);
+            await user.deleteOne( { _id: { $oid: ctx.params.id } } );
+            ctx.response.status = 204;
+            ctx.response.body = { message: "Successfully Deleted" };
+        } catch(e) {
+            ctx.response.status = 404;
+            ctx.response.body = {error: "The id does not exist"};
+        }
     },
 }
