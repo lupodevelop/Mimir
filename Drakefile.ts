@@ -1,16 +1,16 @@
 import { desc, task, sh, run } from "https://deno.land/x/drake@v1.2.6/mod.ts";
 
 desc("Run Mimir Server");
-task("start", [], async function () {
+task("launch", [], async function () {
   await sh(
     "deno run --allow-net --allow-write --allow-read --allow-plugin --unstable mod.ts",
   );
 });
 
 desc("Run Mimir via denon for development");
-task("denon", [], async function () {
+task("start", [], async function () {
   await sh(
-    "deno run --allow-net --allow-write --allow-read --allow-plugin --unstable mod.ts",
+    "denon start",
   );
 });
 
