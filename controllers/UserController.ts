@@ -47,6 +47,21 @@ export default {
 
         }
         const { value } = await ctx.request.body();
+        if ( !value.email ){
+            /* HTTP 422 Unprocessable Entity 
+            response status code indicates that the server 
+            understands the content type of the request entity, 
+            and the syntax of the request entity is correct, 
+            but it was unable to process the contained instructions.
+            */
+            ctx.response.status = 422;
+            ctx.response.body = { 
+                error: { 
+                    message: "Email is required" 
+                }
+            };
+            return;
+        }
         const insertID = await user.insertOne( value );
         /* HTTP 201 Created
         success status response code indicates that the 
