@@ -1,0 +1,12 @@
+{
+    "deno.enable": true,
+
+    //ONLY FOR TODOHIGHLIGHT EXTENSION by Wayou Liu
+    "todohighlight.keywords": [ 
+        {
+        "text": "NOTE:",
+        "color": "#fffff",
+        "backgroundColor": "#7aff68",
+    },
+]
+}
