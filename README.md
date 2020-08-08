@@ -1,5 +1,5 @@
 # Mimir
-A Headless CMS built with Deno 🦕 and Oak 🌳
+A Headless CMS prototype built with **Deno** 🦕, **Oak** 🌳, **MongoDB** 🍃 (**JWT** will be added in the future).
 
 ### Why Mímir
 
