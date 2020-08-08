@@ -1,5 +1,6 @@
 import db from "../config/databases.ts";
 import { ObjectId } from "../deps.ts";
+import validation from "../validation.ts";
 
 const user = db.collection("users");
 
@@ -33,35 +34,11 @@ export default {
         }
     },
     async store ( ctx  : any) {
-        //TODO: Better control over the data entered may be needed
+        
+        //NOTE: validation logic MOVED outside. 
+        const value = await validation.validate(ctx);
 
-        if ( !ctx.request.hasBody ) {
-            /* HTTP 400 Bad Request
-            response status code indicates that the server 
-            cannot or will not process the request due to 
-            something that is perceived to be a client error
-            */
-           ctx.response.status = 400;  
-           ctx.response.body = { error: "Please insert some data" };
-           return;
-
-        }
-        const { value } = await ctx.request.body();
-        if ( !value.email ){
-            /* HTTP 422 Unprocessable Entity 
-            response status code indicates that the server 
-            understands the content type of the request entity, 
-            and the syntax of the request entity is correct, 
-            but it was unable to process the contained instructions.
-            */
-            ctx.response.status = 422;
-            ctx.response.body = { 
-                error: { 
-                    message: "Email is required" 
-                }
-            };
-            return;
-        }
+        if(value) {
         const insertID = await user.insertOne( value );
         /* HTTP 201 Created
         success status response code indicates that the 
@@ -72,20 +49,31 @@ export default {
         */
         ctx.response.status = 201;
         ctx.response.body = insertID;
+        }
     },
-    update ( ctx : any ){
-        
+    async update ( ctx : any ){
+
+        //TODO: Implement data checking before the update.
+
+        const { value } = await ctx.request.body();
+        await user.updateOne(
+            { _id: { $oid: ctx.params.id } },
+            { $set: value },
+        );
+        ctx.response.status = 200;
+        ctx.response.body = { mesasge: "Data updated" };
     },
+
     async destroy ( ctx : any ){
         try {
             // I use the solution I used before to check the id
-            const id = ObjectId(ctx.params.id);
+            const id = ObjectId( ctx.params.id );
             await user.deleteOne( { _id: { $oid: ctx.params.id } } );
             ctx.response.status = 204;
             ctx.response.body = { message: "Successfully Deleted" };
         } catch(e) {
             ctx.response.status = 404;
-            ctx.response.body = {error: "The id does not exist"};
+            ctx.response.body = { error: "The id does not exist" };
         }
     },
 }
