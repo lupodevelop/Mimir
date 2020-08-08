@@ -73,9 +73,16 @@ export default {
         ctx.response.status = 201;
         ctx.response.body = insertID;
     },
-    update ( ctx : any ){
-        
+    async update ( ctx : any ){
+        const { value } = await ctx.request.body();
+        await user.updateOne(
+            { _id: { $oid: ctx.params.id } },
+            { $set: value } 
+        );
+        ctx.response.status = 200;
+        ctx.response.body = {mesasge: "data updated" };
     },
+    
     async destroy ( ctx : any ){
         try {
             // I use the solution I used before to check the id
