@@ -35,6 +35,7 @@ export default {
     },
     async store ( ctx  : any) {
         
+        //NOTE: validation logic MOVED outside. 
         const value = await validation.validate(ctx);
 
         if(value) {
