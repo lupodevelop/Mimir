@@ -74,25 +74,28 @@ export default {
         ctx.response.body = insertID;
     },
     async update ( ctx : any ){
+
+        //TODO: Implement data checking before the update.
+
         const { value } = await ctx.request.body();
         await user.updateOne(
             { _id: { $oid: ctx.params.id } },
-            { $set: value } 
+            { $set: value },
         );
         ctx.response.status = 200;
-        ctx.response.body = {mesasge: "data updated" };
+        ctx.response.body = { mesasge: "Data updated" };
     },
-    
+
     async destroy ( ctx : any ){
         try {
             // I use the solution I used before to check the id
-            const id = ObjectId(ctx.params.id);
+            const id = ObjectId( ctx.params.id );
             await user.deleteOne( { _id: { $oid: ctx.params.id } } );
             ctx.response.status = 204;
             ctx.response.body = { message: "Successfully Deleted" };
         } catch(e) {
             ctx.response.status = 404;
-            ctx.response.body = {error: "The id does not exist"};
+            ctx.response.body = { error: "The id does not exist" };
         }
     },
 }
