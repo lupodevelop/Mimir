@@ -11,6 +11,6 @@ A Headless CMS prototype built with **Deno** 🦕, **Oak** 🌳, **MongoDB** �
 ```bash
 $ deno install --allow-read --allow-run --allow-write --allow-net -f -q --unstable https://deno.land/x/denon@2.3.1/denon.ts
 
-export PATH="/Users/lupodevelop/.deno/bin:$PATH"
+export PATH="/Users/$USER/.deno/bin:$PATH"
 ```
 2. In the terminal, run: `denon start`
