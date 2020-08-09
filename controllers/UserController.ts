@@ -34,10 +34,9 @@ export default {
         }
     },
     async store ( ctx  : any) {
-        
         //NOTE: validation logic MOVED outside. 
         const value = await validation.validate(ctx);
-
+        console.log(value)
         if(value) {
         const insertID = await user.insertOne( value );
         /* HTTP 201 Created
@@ -54,7 +53,7 @@ export default {
     async update ( ctx : any ){
 
         //TODO: Implement data checking before the update.
-        
+
         const value = await validation.validateUpdate(ctx);
         if (value) {
             const data = {
