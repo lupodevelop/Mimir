@@ -1,6 +1,8 @@
 export default {
   async validate(ctx: any) {
 
+    let errors : any = [];
+    let status;
     const { value } = await ctx.request.body();
 
     //TODO: Better control over the data entered may be needed
@@ -28,18 +30,19 @@ export default {
               and the syntax of the request entity is correct, 
               but it was unable to process the contained instructions.
               */
-        ctx.response.status = 422;
-        ctx.response.body = {
-          error: {
-            message: `${fields[i].toUpperCase()} is required`
-          },
-        };
-        return;
+        status = 422;
+
+        errors.push({
+          [fields[i]]: `${fields[i].toUpperCase()} is required`
+        });
+        return false;
       }
       
     }
 
-
+    if (status) {
+    ctx.response.body = {errors};
+    }
 
     return value;
   },
