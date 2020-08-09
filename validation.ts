@@ -18,8 +18,10 @@ export default {
     
     const fields = ['email',];
 
-    fields.forEach(field => {
-      if (!value[field]) {
+
+    for (let i = 0; i < fields.length; i++) {
+      
+      if (!value[fields[i]]) {
         /* HTTP 422 Unprocessable Entity 
               response status code indicates that the server 
               understands the content type of the request entity, 
@@ -29,13 +31,14 @@ export default {
         ctx.response.status = 422;
         ctx.response.body = {
           error: {
-            message: `${field.toUpperCase()} is required`
+            message: `${fields[i].toUpperCase()} is required`
           },
         };
         return;
       }
+      
+    }
 
-    })
 
 
     return value;
