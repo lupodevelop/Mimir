@@ -54,14 +54,23 @@ export default {
     async update ( ctx : any ){
 
         //TODO: Implement data checking before the update.
-
-        const { value } = await ctx.request.body();
-        await user.updateOne(
-            { _id: { $oid: ctx.params.id } },
-            { $set: value },
-        );
-        ctx.response.status = 200;
-        ctx.response.body = { mesasge: "Data updated" };
+        
+        const value = await validation.validateUpdate(ctx);
+        if (value) {
+            const data = {
+                email: value.email,
+                //name: value.name,
+                //password: value.password,
+            };
+            try {
+                await user.updateOne({ _id: ObjectId(ctx.params.id) }, { $set: data });
+                ctx.response.status = 200;
+                ctx.response.body = { message: "updated" };
+            } catch (e) {
+                ctx.response.status = 404;
+                ctx.response.body = { error: "User does't exists in our database." };
+            }
+        }
     },
 
     async destroy ( ctx : any ){

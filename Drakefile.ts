@@ -23,7 +23,9 @@ task("cache", [], async function () {
 
 desc("Install denon for development");
 task("denon-install", [], async function () {
-  await sh("deno install --allow-read --allow-run --allow-write --allow-net -f -q --unstable https://deno.land/x/denon@2.3.1/denon.ts");
+  await sh(
+    "deno install --allow-read --allow-run --allow-write --allow-net -f -q --unstable https://deno.land/x/denon@2.3.1/denon.ts",
+  );
 });
 
 run();

@@ -1,7 +1,6 @@
 export default {
   async validate(ctx: any) {
-
-    let errors : any = [];
+    let errors: any = [];
     let status;
     const { value } = await ctx.request.body();
 
@@ -13,16 +12,14 @@ export default {
             cannot or will not process the request due to 
             something that is perceived to be a client error
             */
-       ctx.response.status = 400;
-       ctx.response.body = { error: "Please insert some data" };
-       return;
+      ctx.response.status = 400;
+      ctx.response.body = { error: "Please insert some data" };
+      return;
     }
-    
-    const fields = ['email',];
 
+    const fields = ["email"];
 
     for (let i = 0; i < fields.length; i++) {
-      
       if (!value[fields[i]]) {
         /* HTTP 422 Unprocessable Entity 
               response status code indicates that the server 
@@ -33,15 +30,26 @@ export default {
         status = 422;
 
         errors.push({
-          [fields[i]]: `${fields[i].toUpperCase()} is required`
+          [fields[i]]: `${fields[i].toUpperCase()} is required`,
         });
         return false;
       }
-      
     }
 
     if (status) {
-    ctx.response.body = {errors};
+      ctx.response.body = { errors };
+      return false;
+    }
+
+    return value;
+  },
+
+  async validateUpdate(ctx: any) {
+    const { value } = await ctx.request.body();
+    if (!value) {
+      ctx.response.status = 400;
+      ctx.response.body = { error: "Please provide the required data" };
+      return false;
     }
 
     return value;

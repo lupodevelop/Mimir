@@ -1,19 +1,18 @@
-import { 
-  log, 
-  Application, 
+import {
+  log,
+  Application,
   config,
- } from "./deps.ts";
- 
+} from "./deps.ts";
+
 import router from "./routes/routes.ts";
 import notFound from "./404.ts";
-
 
 // INIT APP
 const app = new Application();
 
 // SERVER SETTINGS
 const env = config();
-const HOST =  env.APP_HOST || "localhost";
+const HOST = env.APP_HOST || "localhost";
 const PORT = +env.APP_PORT || "8000";
 
 // INIT LOGGER
