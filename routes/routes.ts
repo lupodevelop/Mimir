@@ -9,4 +9,9 @@ router.get("/user", UserController.index)
   .patch("/user:id", UserController.update)
   .delete("/user:id", UserController.destroy);
 
+router.post("/login", (ctx:any)=>{
+  ctx.response.body = "login"
+});
+
 export default router;
+

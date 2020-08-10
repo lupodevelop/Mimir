@@ -18,3 +18,6 @@ export {
   MongoClient,
   ObjectId,
 } from "https://deno.land/x/mongo@v0.9.2/mod.ts";
+
+export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
+
