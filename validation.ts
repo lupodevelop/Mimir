@@ -18,7 +18,7 @@ export default {
   
       const fields = ["email", "password", "name"];
       for (let i = 0; i < fields.length; i++) {
-        if (!value[fields[i]]) {
+        if (value[fields[i]]) {
                /* HTTP 422 Unprocessable Entity 
               response status code indicates that the server 
                understands the content type of the request entity, 
@@ -65,7 +65,7 @@ export default {
   
       const fields = ["email", "password"];
       for (let index = 0; index < fields.length; index++) {
-        if (!value[fields[index]]) {
+        if (value[fields[index]]) {
         // HTTP 422 Unprocessable Entity
           status = 422; 
           errors.push({ [fields[index]]: `${fields[index]} field is required` });
