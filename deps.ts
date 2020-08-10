@@ -17,7 +17,7 @@ export { config } from "https://deno.land/x/dotenv@v0.5.0/mod.ts";
 export {
   MongoClient,
   ObjectId,
-} from "https://deno.land/x/mongo@v0.9.2/mod.ts";
+} from "https://deno.land/x/mongo@v0.10.1/mod.ts";
 
 export * as bcrypt from "https://deno.land/x/bcrypt@v0.2.4/mod.ts";
 
