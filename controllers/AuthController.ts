@@ -4,13 +4,10 @@ import validation from "../validation.ts";
 import hash from "../util/hash.ts";
 //import token from "../util/token.ts";
 
+
 //testing the schema
-interface UserSchema {
-    _id: { $oid: string };
-    email:string;
-    username: string;
-    password: string;
-  }
+import { UserSchema } from "../config/UserSchema.ts";
+
 
 const userCollection = db.collection<UserSchema>("users");
 
