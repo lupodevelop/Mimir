@@ -6,4 +6,6 @@ export interface UserSchema {
   username: string;
   email: string;
   password: string;
+  //NOTE: it's a test.
+  required: ["username", "email", "password"];
 }

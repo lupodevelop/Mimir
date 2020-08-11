@@ -1,3 +1,6 @@
+import { UserSchema } from "./config/UserSchema.ts";
+
+
 export default {
     async validate(ctx: any) {
       let errors = [];
@@ -15,7 +18,9 @@ export default {
         ctx.response.body = { error: "Please provide the required data" };
         return;
       }
-  
+
+      //TODO: try to validate using the schema.
+      
       const fields = ["email", "password", "name"];
       for (let i = 0; i < fields.length; i++) {
         if (value[fields[i]]) {
